@@ -1,0 +1,148 @@
+---
+title: The Controls
+sidebar:
+  order: 20
+---
+
+import { Badge } from "@astrojs/starlight/components";
+import StartStopImage from "../../../../assets/vrti/start_stop.png";
+import SpeedControlImage from "../../../../assets/vrti/speed_control.png";
+import AutoWalkControlImage from "../../../../assets/vrti/autowalk_control.png";
+import YawLockImage from "../../../../assets/vrti/yaw_lock.png";
+import ResetStatsImage from "../../../../assets/vrti/reset_stats.png";
+import SwitchUnitsImage from "../../../../assets/vrti/switch_units.png";
+import TitleBarImage from "../../../../assets/vrti/titlebar.png";
+
+## Connection
+
+VRTI will automatically connect to your treadmill when it finds it. Just turn your treadmill on, make sure your PC's Bluetooth is enabled, and wait a few seconds!
+
+:::tip[Did you know?]
+To read about controlling your Treadmill from within VRChat, check out [OSC Control](/vrti/getting-started/osc-control)!
+:::
+
+## Buttons & Dials
+
+There's a bunch of buttons to press and dials to turn on the VRTI interface. Here's a quick overview of what each of them does.
+
+<div class="flex flex-row items-center justify-center !my-v">
+  <img
+    src="/public/vrti_hero.png"
+    alt="VRTI Controls"
+    class="object-contain h-full"
+    style="max-width: min(90%, 20rem) !important;"
+  />
+</div>
+
+<div class="docs-image-row">
+  <div>
+### Start & Stop
+
+These buttons start and stop your treadmill, and should be pretty straight
+forward.
+
+  </div>
+  <img src={StartStopImage.src} alt="VRTI Controls" />
+</div>
+
+<div class="docs-image-row">
+  <div>
+### Speed Control
+
+For your Treadmill there's two separate speed controls on the VRTI interface: The target speed, and the maximum speed.
+
+#### Target Speed
+
+The target speed is the speed that your treadmill will try to reach. It will never exceed the maximum speed.
+
+You can adjust the target speed by turning the dial, either by clicking and dragging it, or by hovering over it and using your scroll wheel.
+The `+` and `-` buttons will increase and decrease the target speed by 0.5 km/h or m/h respectively.
+
+#### Max Speed
+
+The maximum speed is the fastest your treadmill will go. This is your safety net, and helps you or someone else from accidentally setting your treadmill speed too high.
+The actual limit of this setting is determined by the maximum speed your treadmill can go.
+
+:::danger
+Setting the maximum speed too high can be dangerous, **especially while wearing a VR headset!**
+
+Limiting the maximum speed is a good way to prevent accidents. Start low, and only increase it when you're comfortable.
+
+:::
+
+  </div>
+  <img src={SpeedControlImage.src} alt="VRTI Controls" />
+</div>
+
+<div class="docs-image-row">
+  <div>
+### Auto Walk
+
+The auto walk feature translates the movement of your treadmill into movement input for VRChat, or any other game that supports Xbox controller input.
+
+#### Auto Walk Toggle
+
+With this button you can toggle the auto walk feature on and off. Movement input will only be sent to the game when the feature is enabled.
+
+#### Auto Walk Adjustment
+
+By default, the speed at which you walk in-game is determined by the speed of your treadmill, relative to the maximum speed.
+
+To give an example, if you are walking at 3 km/h, and have your maximum speed set to 6 km/h, you will walk at half speed in-game.
+
+This slider allows you to adjust the speed you are walking in-game, without altering the speed of your treadmill.
+This can be useful to calibrate the speed which you are walking at in-game, or to match your speed with other people walking alongside you, without having to change your actual pace.
+
+#### Input Mode
+
+This toggles the mode used to provide walking input to your game. The default mode is OSC, which only works with VRChat.
+
+Should you wish to provide input to another game, you can switch the input mode to XInput. In this mode, VRTI will emulate a virtual Xbox controller, and send walking input to the game as if you were using the thumbstick.
+Please note that in this mode, the game must likely be in focus in order to receive the controller input.
+
+  </div>
+  <img src={AutoWalkControlImage.src} alt="VRTI Controls" />
+</div>
+
+<div class="docs-image-row">
+  <div>
+### Yaw Lock <Badge size="large" variant="tip" text="VR Only" />
+
+By default, in VR, auto walk will always move you forward, in the direction you're looking.
+This can be disorienting, especially when you're trying to walk in a straight line, but are trying to look around.
+
+When the yaw lock is enabled, the direction you're walking in will be locked, and VRTI will attempt to compensate its movement input for your head rotation. This means that you can look around freely, without drastically changing the direction you're walking in.
+
+The specific direction you're walking in is determined by the direction you're facing when you enable the yaw lock. If you want to change the direction, you can press the "Center" button to reset it to whichever direction you're facing.
+
+  </div>
+  <img src={YawLockImage.src} alt="VRTI Controls" />
+</div>
+
+<div class="docs-image-row">
+  <div>
+### Switch Units
+
+This button toggles between metric and imperial units for the speed and distance displays on the VRTI interface.
+
+  </div>
+  <img src={SwitchUnitsImage.src} alt="VRTI Controls" />
+</div>
+
+<div class="docs-image-row">
+  <div>
+### Reset Stats
+
+This button resets the statistics displayed on the VRTI interface, such as the distance you've walked, and steps you've taken.
+
+  </div>
+  <img src={ResetStatsImage.src} alt="VRTI Controls" />
+</div>
+
+### Settings
+
+<center>
+  <img src={TitleBarImage.src} alt="VRTI Controls" />
+</center>
+
+The circular settings button in the top left corner will open the settings menu, where you can adjust various settings for VRTI.

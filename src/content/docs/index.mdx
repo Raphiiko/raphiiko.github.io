@@ -1,0 +1,167 @@
+---
+#@formatter:off
+title: hi, i'm raphii
+description: Developing software by day‚ simulating a virtual human being by night.
+template: splash
+hero:
+  tagline: Developing software by day‚ simulating a virtual human being by night.
+  image:
+    html: '<div class="hero-image"><img src="/public/raphii_hero.png"/></div>'
+  actions:
+    - text: ""
+      link: https://github.com/Raphiiko
+      icon: github
+      variant: minimal
+    - text: ""
+      link: https://bsky.app/raphii.co
+      icon: blueSky
+      variant: minimal
+    - text: ""
+      link: https://x.com/Raphiiko
+      icon: x.com
+      variant: minimal
+    - text: ""
+      link: https://discord.gg/7MqdPJhYxC
+      icon: discord
+      variant: minimal
+    - text: ""
+      link: mailto:iam@raphii.co
+      icon: email
+      variant: minimal
+    - text: ""
+      link: https://patreon.com/Raphii
+      icon: patreon
+      variant: minimal
+#@formatter:on
+---
+
+import oyasumiVrImg from "../../assets/oyasumivr_icon.png";
+import freckleImg from "../../assets/freckle_icon.svg";
+import vrtiImg from "../../assets/vrti_icon.png";
+import { CardGrid, LinkButton } from "@astrojs/starlight/components";
+import "./index.scss";
+
+## Software
+
+<CardGrid>
+  <article class="card">
+    <div class="w-full flex flex-col h-full">
+      <div className="flex flex-row items-start w-full">
+        <div class="!mt-0 flex-1">
+          <h4>OyasumiVR</h4>
+          <p>
+            Software that helps you sleep in virtual reality. OyasumiVR detects
+            when you are asleep and automates various tasks and settings to make
+            VR sleeping as comfortable as possible.
+          </p>
+        </div>
+        <div class="!mt-0">
+          <img src={oyasumiVrImg.src} alt="OyasumiVR Icon" class="w-20 ml-6" />
+        </div>
+      </div>
+      <div class="flex-1 flex flex-row items-end justify-start flex-wrap">
+        <LinkButton
+          href="/oyasumivr/introduction"
+          variant="primary"
+          icon="right-arrow"
+        >
+          Read More
+        </LinkButton>
+        <LinkButton
+          href="https://store.steampowered.com/app/2538150/OyasumiVR__VR_Sleeping_Utilities/"
+          variant="secondary"
+          icon="external"
+        >
+          Steam Store
+        </LinkButton>
+      </div>
+    </div>
+  </article>
+  <article class="card">
+    <div class="w-full flex flex-col h-full">
+      <div className="flex flex-row items-start w-full">
+        <div class="!mt-0 flex-1">
+          <h4>
+            VRTI{" "}
+            <span class="text-gray-500 text-lg">(VR Treadmill Interface)</span>
+          </h4>
+          <p>
+            Use your bluetooth-controlled treadmill in VR. VRTI automatically
+            provides walking input to VRChat and other (VR and non-VR) games via
+            OSC or controller emulation. Great for walking together with
+            friends!
+          </p>
+        </div>
+        <div class="!mt-0">
+          <img src={vrtiImg.src} alt="VRTI Icon" class="w-20 ml-6" />
+        </div>
+      </div>
+      <div class="flex-1 flex flex-row items-end justify-start flex-wrap">
+        <LinkButton
+          href="/vrti/introduction"
+          variant="primary"
+          icon="right-arrow"
+        >
+          Read More
+        </LinkButton>
+        <LinkButton href="#" variant="secondary" icon="external">
+          Download
+        </LinkButton>
+      </div>
+    </div>
+  </article>
+</CardGrid>
+
+## Tools
+
+<CardGrid>
+  <article class="card">
+    <div class="w-full flex flex-col h-full">
+      <div className="flex flex-row items-start w-full">
+        <div class="!mt-0 flex-1">
+          <h4>oyasumivr_oscquery</h4>
+          <p>
+            A Rust crate offering a limited OSCQuery implementation for use with
+            VRChat. It can be used to easily add OSCQuery support to Rust-based
+            VRChat projects, and is used by both OyasumiVR and VRTI.
+          </p>
+        </div>
+      </div>
+      <div class="flex-1 flex flex-row items-end justify-start flex-wrap">
+        <LinkButton
+          href="https://github.com/Raphiiko/oyasumivr_oscquery/"
+          variant="secondary"
+          icon="external"
+        >
+          GitHub Repository
+        </LinkButton>
+      </div>
+    </div>
+  </article>
+  <article class="card">
+    <div class="w-full flex flex-col h-full">
+      <div className="flex flex-row items-start w-full">
+        <div class="!mt-0 flex-1">
+          <h4>Freckle Textures</h4>
+          <p>
+            I sell custom freckle textures for various 3D avatar models sold on
+            [booth.pm](https://raphiiko.booth.pm/), that are commonly used in
+            VRChat.
+          </p>
+        </div>
+        <div class="!mt-0">
+          <img src={freckleImg.src} alt="Freckles Icon" class="w-20 ml-6" />
+        </div>
+      </div>
+      <div class="flex-1 flex flex-row items-end justify-start flex-wrap">
+        <LinkButton
+          href="https://raphiiko.booth.pm/"
+          variant="secondary"
+          icon="external"
+        >
+          Booth.pm Store
+        </LinkButton>
+      </div>
+    </div>
+  </article>
+</CardGrid>

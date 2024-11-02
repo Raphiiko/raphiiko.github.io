@@ -1,0 +1,18 @@
+.hero-html {
+  width: min(70%, 15rem) !important;
+}
+
+.hero-image {
+  @apply relative w-full;
+  aspect-ratio: 1/1;
+
+  img {
+    @apply w-full absolute top-1/2 -translate-y-1/2;
+  }
+
+  @media (min-width: 50rem) {
+    img {
+      @apply right-0;
+    }
+  }
+}

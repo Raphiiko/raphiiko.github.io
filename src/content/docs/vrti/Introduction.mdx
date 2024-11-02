@@ -1,0 +1,32 @@
+---
+title: VRTI
+sidebar:
+  label: Introduction
+  order: 0
+next:
+  link: /vrti/getting-started/prerequisites
+  label: Getting Started
+prev: false
+hero:
+  tagline: VR Treadmill Interface
+  image:
+    html: '<div class="hero-image"><img src="/public/vrti_hero.png"/></div>'
+  actions:
+    - text: Download
+      link: https://github.com/Raphiiko
+      icon: right-arrow
+      variant: primary
+---
+
+import "Introduction.scss";
+
+VRTI (or VR Treadmill Interface) is a tool that enables you control your Bluetooth-enabled treadmill, and translate its movement into your game.
+This allows you to take walks with your friends in VRChat, or exercise in your favourite VR (or non-VR) game.
+
+VRTI communicates with your treadmill over Bluetooth (BLE). Please check the current list of [supported devices](/vrti/help/supported-devices) to see if your treadmill is compatible.
+Currently, VRTI only supports various KingSmith WalkingPad models, but it is planned to receive FTMS support in order to support more treadmills.
+
+Input to the game is either provided over [OSC](https://docs.vrchat.com/docs/osc-overview) in the case of VRChat, or by emulating a virtual Xbox (XInput) controller for other games.
+The speed at which you walk in-game is determined by the speed of your treadmill.
+
+Read on in the next section to find out how to get started.

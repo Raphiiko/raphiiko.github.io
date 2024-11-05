@@ -1,0 +1,83 @@
+---
+title: Status Display
+sidebar:
+  order: 40
+---
+
+import StatusDisplayImage from "../../../../assets/vrti/status_display.png";
+import StatusDisconnectedImage from "../../../../assets/vrti/status_disconnected.png";
+import StatusConnectedImage from "../../../../assets/vrti/status_connected.png";
+import StatusTreadmillRunningImage from "../../../../assets/vrti/status_treadmill_running.png";
+import StatusTreadmillStoppedImage from "../../../../assets/vrti/status_treadmill_stopped.png";
+import StatusTreadmillStandbyImage from "../../../../assets/vrti/status_treadmill_standby.png";
+import StatusOscImage from "../../../../assets/vrti/status_osc.png";
+
+The status display allows you to see information about various parts of VRTI, like the status of your treadmill.
+
+<center>
+  <img src={StatusDisplayImage.src} alt="Status Display" class="rounded" />
+</center>
+
+## Status Indicators
+
+Various icons will light up on the status display. This is what they mean:
+
+<div class="docs-image-row">
+  <div>
+    ### Treadmill Disconnected
+
+    When this indicator is active, VRTI is not connected to your treadmill.
+
+  </div>
+  <img src={StatusDisconnectedImage.src} alt="Treadmill Disconnected Icon" />
+</div>
+
+<div class="docs-image-row">
+  <div>
+    ### Treadmill Connected
+
+    When this indicator is active, VRTI is currently connected to your treadmill.
+
+  </div>
+  <img src={StatusConnectedImage.src} alt="Treadmill Connected Icon" />
+</div>
+
+<div class="docs-image-row">
+  <div>
+    ### VRChat OSC Available
+
+    When this indicator is active, VRChat's OSC server has been found and is able to receive OSC input from VRTI.
+
+  </div>
+  <img src={StatusOscImage.src} alt="OSC Connected Icon" />
+</div>
+
+<div class="docs-image-row">
+  <div>
+    ### Treadmill Running
+
+    When this indicator is active, your treadmill is currently running.
+
+  </div>
+  <img src={StatusTreadmillRunningImage.src} alt="Treadmill Running Icon" />
+</div>
+
+<div class="docs-image-row">
+  <div>
+    ### Treadmill Stopped
+
+    When this indicator is active, your treadmill is currently stopped.
+
+  </div>
+  <img src={StatusTreadmillStoppedImage.src} alt="Treadmill Stopped Icon" />
+</div>
+
+<div class="docs-image-row">
+  <div>
+    ### Treadmill Standby
+
+    When this indicator is active, your treadmill is currently in standby mode. This status is currently only supported on KingSmith WalkingPad treadmills.
+
+  </div>
+  <img src={StatusTreadmillStandbyImage.src} alt="Treadmill Standby Icon" />
+</div>

@@ -6,12 +6,13 @@ import starlightUtils from "@lorenzo_lewis/starlight-utils";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://raphii.co",
   integrations: [
     starlight({
       title: ">raphii",
       social: {
         github: "https://github.com/Raphiiko",
-        blueSky: "https://bsky.app/raphii.co",
+        blueSky: "https://bsky.app/profile/raphii.co",
         "x.com": "https://x.com/Raphiiko",
         discord: "https://discord.gg/7MqdPJhYxC",
         email: "mailto:iam@raphii.co",

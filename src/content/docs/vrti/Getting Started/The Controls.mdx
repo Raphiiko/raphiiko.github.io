@@ -1,7 +1,7 @@
 ---
 title: The Controls
 sidebar:
-  order: 20
+  order: 30
 ---
 
 import { Badge } from "@astrojs/starlight/components";
@@ -11,23 +11,16 @@ import AutoWalkControlImage from "../../../../assets/vrti/autowalk_control.png";
 import YawLockImage from "../../../../assets/vrti/yaw_lock.png";
 import ResetStatsImage from "../../../../assets/vrti/reset_stats.png";
 import SwitchUnitsImage from "../../../../assets/vrti/switch_units.png";
-import TitleBarImage from "../../../../assets/vrti/titlebar.png";
 
-## Connection
-
-VRTI will automatically connect to your treadmill when it finds it. Just turn your treadmill on, make sure your PC's Bluetooth is enabled, and wait a few seconds!
-
-:::tip[Did you know?]
+:::tip
 To read about controlling your Treadmill from within VRChat, check out [OSC Control](/vrti/getting-started/osc-control)!
 :::
-
-## Buttons & Dials
 
 There's a bunch of buttons to press and dials to turn on the VRTI interface. Here's a quick overview of what each of them does.
 
 <div class="flex flex-row items-center justify-center !my-v">
   <img
-    src="/public/vrti_hero.png"
+    src="/img/vrti_hero.png"
     alt="VRTI Controls"
     class="object-contain h-full"
     style="max-width: min(90%, 20rem) !important;"
@@ -138,11 +131,3 @@ This button resets the statistics displayed on the VRTI interface, such as the d
   </div>
   <img src={ResetStatsImage.src} alt="VRTI Controls" />
 </div>
-
-### Settings
-
-<center>
-  <img src={TitleBarImage.src} alt="VRTI Controls" />
-</center>
-
-The circular settings button in the top left corner will open the settings menu, where you can adjust various settings for VRTI.

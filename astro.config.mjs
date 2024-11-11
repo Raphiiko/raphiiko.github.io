@@ -10,6 +10,7 @@ export default defineConfig({
   integrations: [
     starlight({
       title: ">raphii",
+      lastUpdated: true,
       social: {
         github: "https://github.com/Raphiiko",
         blueSky: "https://bsky.app/profile/raphii.co",

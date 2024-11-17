@@ -19,7 +19,7 @@ export default defineConfig({
         email: "mailto:iam@raphii.co",
         patreon: "https://patreon.com/Raphii",
       },
-      favicon: "/favicon.png",
+      favicon: "/favicon-96x96.png",
       head: [
         {
           tag: "link",

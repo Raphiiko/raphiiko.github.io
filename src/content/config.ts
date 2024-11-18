@@ -5,10 +5,10 @@ export const collections = {
   docs: defineCollection({
     schema: docsSchema({
       extend: z.object({
-        banner: z.object({ content: z.string() }).default({
-          content:
-            "🚧 This site is currently under construction. Please excuse the mess! 🚧",
-        }),
+        // banner: z.object({ content: z.string() }).default({
+        // content:
+        //   "🚧 This site is currently under construction. Please excuse the mess! 🚧",
+        // }),
       }),
     }),
   }),

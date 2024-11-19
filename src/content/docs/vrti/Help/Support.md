@@ -1,7 +1,7 @@
 ---
 title: Support
 sidebar:
-  order: 30
+  order: 40
 ---
 
 If you are experiencing any issues with VRTI, feel free to drop by in the [Discord](https://discord.gg/7MqdPJhYxC), or send me a direct message on @raphiiko!

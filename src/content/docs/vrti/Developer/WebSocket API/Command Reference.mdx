@@ -1,0 +1,227 @@
+---
+title: Command Reference
+sidebar:
+#@formatter:off
+  order: 20
+#@formatter:on
+---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+You can request VRTI to perform an action by sending it a command. Please see [Sending a command](/vrti/developer/websocket-api/using-the-api#sending-a-command) for more information on how to send commands.
+
+Some commands will return a response by emitting an event. You do not have to subscribe to these events to receive them as a response to commands you issue.
+
+### `EventSubscribe`
+
+Subscribes the client to the events specified in the payload.
+
+<Tabs>
+  <TabItem label="Example Payload">
+    {/*@formatter:off*/}
+    ```typescript
+    [
+      "TreadmillStateUpdated",
+      "AutoWalkSettingsUpdated",
+      "StatisticsUpdated"
+    ]
+    ```
+    {/*@formatter:on*/}
+  </TabItem>
+  <TabItem label="Payload Model">
+    {/*@formatter:off*/}
+    ```typescript
+    EventName[]
+    ```
+    {/*@formatter:on*/}
+  </TabItem>
+</Tabs>
+
+See the [Event Reference](/vrti/developer/websocket-api/event-reference) for a full list of available events you can subscribe to.
+
+### `EventUnsubscribe`
+
+Unsubscribes the client from the events specified in the payload.
+
+<Tabs>
+  <TabItem label="Example Payload">
+    {/*@formatter:off*/}
+    ```typescript
+    [
+      "AutoWalkSettingsUpdated",
+      "StatisticsUpdated"
+    ]
+    ```
+    {/*@formatter:on*/}
+  </TabItem>
+  <TabItem label="Payload Model">
+    {/*@formatter:off*/}
+    ```typescript
+    string[]
+    ```
+    {/*@formatter:on*/}
+  </TabItem>
+</Tabs>
+
+See the [Event Reference](/vrti/developer/websocket-api/event-reference) for a full list of available events you can subscribe to.
+
+### `SetTargetSpeed`
+
+Sets the target speed of the currently connected treadmill.
+
+If the provided value is above 0, it will automatically be limited to the speed range of the connected treadmill, and the currently configured maximum speed.
+The treadmill start moving if the target speed is above 0.
+
+If the provided value is 0 or below, the treadmill will be stopped.
+
+<Tabs>
+  <TabItem label="Example Payload">
+    {/*@formatter:off*/}
+    ```typescript
+    2.5 // The target speed in km/h
+    ```
+    {/*@formatter:on*/}
+  </TabItem>
+  <TabItem label="Payload Model">
+    {/*@formatter:off*/}
+    ```typescript
+    number
+    ```
+    {/*@formatter:on*/}
+  </TabItem>
+</Tabs>
+
+Sends [`TreadmillStateUpdated`](/vrti/developer/websocket-api/event-reference/#treadmillstateupdated) as a response.
+
+### `SetSpeedLimit`
+
+Sets the current user configured maximum speed limit.
+
+The provided value will automatically be limited to the speed range of the connected treadmill.
+
+If the new maximum speed is below the current target speed, the target speed adapt to the new maximum speed.
+
+<Tabs>
+  <TabItem label="Example Payload">
+    {/*@formatter:off*/}
+    ```typescript
+    6.0 // The maximum speed in km/h
+    ```
+    {/*@formatter:on*/}
+  </TabItem>
+  <TabItem label="Payload Model">
+    {/*@formatter:off*/}
+    ```typescript
+    number
+    ```
+    {/*@formatter:on*/}
+  </TabItem>
+</Tabs>
+
+Sends [`TreadmillStateUpdated`](/vrti/developer/websocket-api/event-reference/#treadmillstateupdated) as a response.
+
+### `ToggleAutoWalk`
+
+Toggles the auto walk feature on or off.
+
+Optionally, you can provide a payload to force the auto walk feature to be enabled or disabled.
+The feature will be toggled if no payload is provided.
+
+<Tabs>
+  <TabItem label="Example Payload">
+    {/*@formatter:off*/}
+    ```typescript
+    true
+    ```
+    {/*@formatter:on*/}
+  </TabItem>
+  <TabItem label="Payload Model">
+    {/*@formatter:off*/}
+    ```typescript
+    boolean?
+    ```
+    {/*@formatter:on*/}
+  </TabItem>
+</Tabs>
+
+Sends [`AutoWalkSettingsUpdated`](/vrti/developer/websocket-api/event-reference/#autowalksettingsupdated) as a response.
+
+### `SetAutoWalkSpeed`
+
+Sets the auto walk speed. The value acts as a multiplier, with `1.0` being the default.
+
+The provided value will automatically be limited to the range of `0.0` to `2.0`.
+
+<Tabs>
+  <TabItem label="Example Payload">
+    {/*@formatter:off*/}
+    ```typescript
+    0.5 // The multiplier value, ranged 0.0 to 2.0
+    ```
+    {/*@formatter:on*/}
+  </TabItem>
+  <TabItem label="Payload Model">
+    {/*@formatter:off*/}
+    ```typescript
+    number
+    ```
+    {/*@formatter:on*/}
+  </TabItem>
+</Tabs>
+
+Sends [`AutoWalkSettingsUpdated`](/vrti/developer/websocket-api/event-reference/#autowalksettingsupdated) as a response.
+
+### `ToggleYawLock`
+
+Toggles the yaw lock for the auto walk feature on or off.
+
+Optionally, you can provide a payload to force the feature to be either enabled or disabled.
+The feature will be toggled if no payload is provided.
+
+<Tabs>
+  <TabItem label="Example Payload">
+    {/*@formatter:off*/}
+    ```typescript
+    true
+    ```
+    {/*@formatter:on*/}
+  </TabItem>
+  <TabItem label="Payload Model">
+    {/*@formatter:off*/}
+    ```typescript
+    boolean?
+    ```
+    {/*@formatter:on*/}
+  </TabItem>
+</Tabs>
+
+Sends [`AutoWalkSettingsUpdated`](/vrti/developer/websocket-api/event-reference/#autowalksettingsupdated) as a response.
+
+### `CenterYawLock`
+
+Resets the yaw lock to the current direction the user is facing.
+
+This command is only available while the yaw lock feature is enabled, and the current rotation of the a VR headset is known.
+
+### `ResetStatistics`
+
+Resets the treadmill statistics back to zero.
+
+Sends [`StatisticsUpdated`](/vrti/developer/websocket-api/event-reference/#statisticsupdated) as a response.
+
+### `GetTreadmillState`
+
+Requests the current state of the treadmill.
+
+Sends [`TreadmillStateUpdated`](/vrti/developer/websocket-api/event-reference/#treadmillstateupdated) as a response.
+
+### `GetAutoWalkSettings`
+
+Requests the current auto walk settings.
+
+Sends [`AutoWalkSettingsUpdated`](/vrti/developer/websocket-api/event-reference/#autowalksettingsupdated) as a response.
+
+### `GetStatistics`
+
+Requests the current treadmill statistics.
+
+Sends [`StatisticsUpdated`](/vrti/developer/websocket-api/event-reference/#statisticsupdated) as a response.

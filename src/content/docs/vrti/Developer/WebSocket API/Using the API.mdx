@@ -6,6 +6,7 @@ sidebar:
 #@formatter:on
 ---
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import WSSettingsImage from "../../../../../assets/vrti/websocket_settings.png";
 
 In order to enable external programs to interact with your Treadmill, VRTI offers a websocket API that the user can enable.
 
@@ -18,6 +19,10 @@ The Websocket API is only available with a paid license.
 The Websocket API can be enabled within VRTI's settings.
 
 By default, the websocket API is exposed on port `54126`. This port can be changed by the user within the settings dialog.
+
+<center>
+  <img src={WSSettingsImage.src} alt="WebSocket Settings" />
+</center>
 
 :::caution
 VRTI's websocket API only listens on `127.0.0.1` (localhost). You cannot connect to VRTI over the network from another device.

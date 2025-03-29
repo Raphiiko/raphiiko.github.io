@@ -1,0 +1,64 @@
+---
+title: Event Reference
+sidebar:
+#@formatter:off
+  order: 30
+#@formatter:on
+---
+
+You can subscribe to events emitted by VRTI.
+Please see [Subscribing to events](/vrti/developer/websocket-api/using-the-api#subscribing-to-events) for more information on how to subscribe to events.
+
+Some events will be emitted in response to commands you issue. You do not have to subscribe to these events to receive them as a responses.
+Which commands will send response events is documented in the [Command Reference](/vrti/developer/websocket-api/command-reference).
+
+### `TreadmillStateUpdated`
+
+Emitted when the treadmill state changes.
+
+```json title="Event Payload"
+{
+  "connected": boolean, // Whether a treadmill is currently connected
+  "running": boolean, // If the treadmill's belt is currently running
+  "currentSpeed": number, // The treadmill's current speed in km/h
+  "targetSpeed": number, // The set target speed in km/h
+  "userSpeedLimit": number, // The user configured maximum speed limit in km/h
+  "stepsSupported": boolean, // Whether the treadmill supports step counting
+  "distanceSupported": boolean, // Whether the treadmill supports distance tracking
+  "deviceSpeedRange": {
+    "min": number, // The minimum speed of the treadmill in km/h
+    "max": number, // The maximum speed of the treadmill in km/h
+    "step": number // The minimum increment of the treadmill speed in km/h
+  }
+}
+```
+
+### `AutoWalkSettingsUpdated`
+
+Emitted when the auto walk settings change.
+
+```json title="Event Payload"
+{
+  "enabled": boolean, // Whether the auto walk feature is enabled
+  "speed": number, // The current speed multiplier of the auto walk feature
+  "inputMode": 'VRChatOSC' | 'XInput', // The mode of input used by the auto walk feature
+  "yawLock": boolean // Whether the yaw lock is active
+}
+```
+
+### `YawLockCentered`
+
+Emitted when the yaw lock is centered.
+
+### `StatisticsUpdated`
+
+Emitted when the currently tracked statistics change.
+
+```json title="Event Payload"
+{
+  "steps": 0, // The number of steps taken
+  "distance": 0 // The distance covered in kilometers
+}
+```
+
+

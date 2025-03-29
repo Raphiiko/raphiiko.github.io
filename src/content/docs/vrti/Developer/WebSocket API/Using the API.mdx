@@ -1,0 +1,157 @@
+---
+title: Using the API
+sidebar:
+#@formatter:off
+  order: 10
+#@formatter:on
+---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import WSSettingsImage from "../../../../../assets/vrti/websocket_settings.png";
+
+In order to enable external programs to interact with your Treadmill, VRTI offers a websocket API that the user can enable.
+
+:::note
+The Websocket API is only available with a paid license.
+:::
+
+## Configuration
+
+The Websocket API can be enabled within VRTI's settings.
+
+By default, the websocket API is exposed on port `54126`. This port can be changed by the user within the settings dialog.
+
+<center>
+  <img src={WSSettingsImage.src} alt="WebSocket Settings" />
+</center>
+
+:::caution
+VRTI's websocket API only listens on `127.0.0.1` (localhost). You cannot connect to VRTI over the network from another device.
+:::
+
+## Message Formats
+
+### Command Format
+
+Commands are sent to VRTI to perform various actions.
+Every command should be a JSON object with the following properties:
+
+| Property                                                  | Value Type | Description                                                                                                    |
+|:----------------------------------------------------------|:-----------|:---------------------------------------------------------------------------------------------------------------|
+| `command`                                                 | string     | The command to run                                                                                             |
+| <span style="white-space: nowrap">`payload` **\***</span> | string     | The command specific payload for the specified command. This should always be a valid JSON value.              |
+| <span style="white-space: nowrap">`refId` **\***</span>   | string     | A unique identifier for the command. This identifier will be returned in any response event if you specify it. |
+| <span style="white-space: nowrap">**\*** Optional</span>  |
+
+See the [Command Reference](/vrti/developer/websocket-api/command-reference) for a list of available commands.
+
+Some commands will return a response, which will be sent like any other [event](#event-format).
+Unlike other events, clients do not have to subscribe to these response events to receive them.
+
+### Event Format
+
+Events are sent by VRTI to connected clients.
+
+Event messages are only sent for the specific events that the client has subscribed to.
+For events that are sent as a response to a command, clients do not have to subscribe to receive them.
+
+To subscribe to an event, send a [`EventSubscribe`](/vrti/developer/websocket-api/command-reference/#eventsubscribe) command for each event you want to receive messages for.
+
+Every event is a JSON object with the following properties:
+
+| Property                                                  | Value Type | Description                                                                                                                         |
+|:----------------------------------------------------------|:-----------|:------------------------------------------------------------------------------------------------------------------------------------|
+| `event`                                                   | string     | The name of the event                                                                                                               |
+| <span style="white-space: nowrap">`payload` **\***</span> | string     | The event specific payload for the specified event. This is always a valid JSON value.                                              |
+| <span style="white-space: nowrap">`refId` **\***</span>   | string     | If this event is a response to a command for which a `refId` property was specified, this property will be set with the same value. |
+| <span style="white-space: nowrap">**\*** Optional</span>  |
+
+See the [Event Reference](/vrti/developer/websocket-api/event-reference) for a list of available events.
+
+## Connecting to the WebSocket
+
+A TypeScript example of how to connect to the WebSocket API in NodeJS is shown below.
+
+While these examples are written in TypeScript, you can apply the same concepts to any other languages that support WebSockets.
+
+```typescript
+// Construct the WebSocket object and connect to VRTI's WebSocket.
+const socket = new WebSocket("ws://localhost:54126");
+
+socket.addEventListener("open", (event) => {
+  // We are now connected to VRTI's WebSocket API
+  console.log("Connected to VRTI");
+});
+```
+
+## Sending a command
+
+Once you are connected to VRTI's WebSocket, you can send commands to VRTI to perform various actions.
+
+Below you will find an example of how to send a command that starts a treadmill by setting its target speed to 5.0 km/h.
+
+```typescript
+// Construct the message for the command
+const message = {
+  command: "SetTargetSpeed",
+  payload: "5.0"
+};
+// Convert the message to a JSON string and send it over the WebSocket
+socket.send(JSON.stringify(message));
+```
+
+See the [Command Reference](/vrti/developer/websocket-api/command-reference) for a full list of available commands.
+
+## Subscribing to events
+
+To receive events from VRTI, you need to subscribe to them (with the exception of events sent as a command response).
+To subscribe to an event, you need to send the [`EventSubscribe`](/vrti/developer/websocket-api/command-reference/#eventsubscribe) command with the events you want to receive:
+
+```typescript
+// Subscribe to the TreadmillStateUpdated and AutoWalkSettingsUpdated events
+const message = {
+  command: "EventSubscribe",
+  payload: JSON.stringify(["TreadmillStateUpdated", "AutoWalkSettingsUpdated"])
+};
+  socket.send(JSON.stringify(message));
+```
+
+See the [Event Reference](/vrti/developer/websocket-api/event-reference) for a full list of available events you can subscribe to.
+
+Once you have subscribed to an event, you will receive messages for that event as they occur:
+
+<Tabs>
+  <TabItem label="Example Code">
+    {/*@formatter:off*/}
+    ```typescript
+    socket.addEventListener('message', (event) => {
+      // Parse the incoming message
+      const message = JSON.parse(event.data);
+      // Check if it's a TreadmillStateUpdated event
+      if (message.event === 'TreadmillStateUpdated') {
+        // If so, parse its payload and log it
+        const payload = JSON.parse(message.payload);
+        console.log('Treadmill State Updated:', payload);
+      }
+    });
+    ```
+    {/*@formatter:on*/}
+  </TabItem>
+  <TabItem label="Console Output">
+    {/*@formatter:off*/}
+    ```
+    Treadmill State Updated: {
+      connected: true,
+      running: true,
+      currentSpeed: 1.89,
+      targetSpeed: 2,
+      userSpeedLimit: 7.5,
+      deviceSpeedRange: { min: 0.5, max: 10, step: 0.1 },
+      stepsSupported: false,
+      distanceSupported: false
+    }
+    ```
+    {/*@formatter:on*/}
+  </TabItem>
+</Tabs>
+
+

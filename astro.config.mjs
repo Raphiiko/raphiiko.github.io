@@ -74,7 +74,19 @@ export default defineConfig({
         },
         {
           label: "VRTI",
-          autogenerate: { directory: "vrti" },
+          items: [
+            { label: "Introduction", slug: "vrti/introduction" },
+            {
+              label: "Getting Started",
+              autogenerate: { directory: "vrti/Getting Started" },
+            },
+            { label: "Help", autogenerate: { directory: "vrti/Help" } },
+            { label: "Pricing", slug: "vrti/pricing" },
+            {
+              label: "Developer",
+              autogenerate: { directory: "vrti/Developer" },
+            },
+          ],
         },
       ],
       customCss: ["./src/tailwind.scss"],

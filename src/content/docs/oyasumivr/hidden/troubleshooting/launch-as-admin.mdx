@@ -1,0 +1,51 @@
+---
+title: "Cannot launch OyasumiVR: Administrative permissions detected"  
+pagefind: false
+sidebar:
+  hidden: true
+---
+
+If you run into this issue, you most likely tried to run OyasumiVR as administrator.
+
+For security reasons, OyasumiVR does **not** support being ran with administrative privileges. 
+As various features in OyasumiVR can be configured to run other applications on your behalf, 
+running OyasumiVR as administrator could pose a security risk, and offer malicious actors a path to privilege escalation.
+
+While some of OyasumiVR's features do require administrative privileges (for example, those for limiting power usage of your graphics card), 
+these are safely controlled through a separate elevated sidecar process, allowing OyasumiVR itself to run with standard user privileges.
+
+### I know what I'm doing and I want to do it anyways
+
+:::caution
+Running OyasumiVR's main process with administrative privileges could pose security risks.
+Please **do not try this** unless you're willing to accept these risks.
+:::
+
+It is possible to have OyasumiVR disable its elevation security. To disable elevation security:
+
+1. Open a command prompt with administrative privileges. An easy way to do this is to press `Win+X` and select `Terminal (Admin)`.
+
+2. Change to the installation directory, containing the `OyasumiVR.exe` file.	(The installation path may differ, adjust it accordingly)
+```powershell title="Command Prompt (Admin)"
+$ cd "C:\Program Files (x86)\Steam\steamapps\common\OyasumiVR"
+```
+
+3. Run OyasumiVR with the following flag:
+```powershell title="Command Prompt (Admin)"
+$ .\OyasumiVR.exe --dont-need-security-where-im-going-uwu
+```
+
+If everything went correctly, you should now be able to run OyasumiVR with administrative privileges.
+
+#### Resetting elevation security
+
+In order to reset elevation security, you can follow the same steps, but use the following flag instead:
+
+```powershell title="Command Prompt (Admin)"
+$ .\OyasumiVR.exe --reset-elevation-security
+```
+
+OyasumiVR will now no longer allow you to run it with administrative privileges.
+
+
+

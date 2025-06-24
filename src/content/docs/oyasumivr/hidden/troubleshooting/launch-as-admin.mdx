@@ -1,5 +1,5 @@
 ---
-title: "Cannot launch OyasumiVR: Administrative permissions detected"  
+title: "Cannot launch OyasumiVR: Administrative permissions detected"
 pagefind: false
 sidebar:
   hidden: true
@@ -7,12 +7,18 @@ sidebar:
 
 If you run into this issue, you most likely tried to run OyasumiVR as administrator.
 
-For security reasons, OyasumiVR does **not** support being ran with administrative privileges. 
-As various features in OyasumiVR can be configured to run other applications on your behalf, 
+For security reasons, OyasumiVR does **not** support being ran with administrative privileges.
+As various features in OyasumiVR can be configured to run other applications on your behalf,
 running OyasumiVR as administrator could pose a security risk, and offer malicious actors a path to privilege escalation.
 
-While some of OyasumiVR's features do require administrative privileges (for example, those for limiting power usage of your graphics card), 
+While some of OyasumiVR's features do require administrative privileges (for example, those for limiting power usage of your graphics card),
 these are safely controlled through a separate elevated sidecar process, allowing OyasumiVR itself to run with standard user privileges.
+
+### I didn't launch OyasumiVR as administrator
+
+If you're launching OyasumiVR through Steam or another game/app launcher, make sure that is not running with administrator permissions either.
+
+When Steam (or your launcher) is running with administrative permissions and then launches a game or app like OyasumiVR, that app will inherit the administrative permissions.
 
 ### I know what I'm doing and I want to do it anyways
 
@@ -25,28 +31,27 @@ It is possible to have OyasumiVR disable its elevation security. To disable elev
 
 1. Open a command prompt with administrative privileges. An easy way to do this is to press `Win+X` and select `Terminal (Admin)`.
 
-2. Change to the installation directory, containing the `OyasumiVR.exe` file.	(The installation path may differ, adjust it accordingly)
+2. Change to the installation directory, containing the `OyasumiVR.exe` file. (The installation path may differ, adjust it accordingly)
+
 ```powershell title="Command Prompt (Admin)"
-$ cd "C:\Program Files (x86)\Steam\steamapps\common\OyasumiVR"
+cd "C:\Program Files (x86)\Steam\steamapps\common\OyasumiVR"
 ```
 
 3. Run OyasumiVR with the following flag:
+
 ```powershell title="Command Prompt (Admin)"
-$ .\OyasumiVR.exe --dont-need-security-where-im-going-uwu
+.\OyasumiVR.exe --dont-need-security-where-im-going-uwu
 ```
 
 You should only have to do this once. You can now close the command prompt.
-If everything went correctly, from now on you should be able to run OyasumiVR with administrative privileges. 
+If everything went correctly, from now on you should be able to run OyasumiVR with administrative privileges.
 
 #### Resetting elevation security
 
 In order to reset elevation security, you can follow the same steps, but use the following flag instead:
 
 ```powershell title="Command Prompt (Admin)"
-$ .\OyasumiVR.exe --reset-elevation-security
+.\OyasumiVR.exe --reset-elevation-security
 ```
 
 OyasumiVR will now no longer allow you to run it with administrative privileges.
-
-
-
